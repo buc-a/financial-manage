@@ -1,0 +1,58 @@
+services:
+  mongo1:
+    hostname: mongo1
+    image: mongo:8.0
+    expose:
+      - 27017
+    volumes:
+      - mongo1-data:/data/db
+    command: mongod --replSet my-mongo-set
+    restart: always
+
+  mongo2:
+    hostname: mongo2
+    image: mongo:8.0
+    expose:
+      - 27017
+    volumes:
+      - mongo2-data:/data/db
+    command: mongod --replSet my-mongo-set
+
+    restart: always
+
+  mongo3:
+    hostname: mongo3
+    image: mongo:8.0
+    expose:
+      - 27017
+    restart: always
+    command: mongod --replSet my-mongo-set
+    
+  mongo-init:
+    image: mongo:8.0
+    depends_on:
+      - mongo1
+      - mongo2
+      - mongo3
+    volumes:
+      - ./bd/docker-entrypoint-initdb.d/:/docker-entrypoint-initdb.d/
+    restart: "no"
+    
+  back:
+    build:
+        context: .
+        dockerfile: back/Dockerfile
+    restart: always
+
+  front:
+      build:
+          context: .
+          dockerfile: front/Dockerfile
+      restart: always
+      depends_on:
+        - back
+      ports: 
+        - "80:80"
+volumes:
+  mongo1-data:
+  mongo2-data:

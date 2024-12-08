@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="./style.css">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    </head>
+    <body>
+        <div>
+            <p class="title">Учет финансов Вашей организации</p>
+            <div class="table">
+                <div class="card card-budget">
+                    <p class="card__title">Текущий баланс</p>
+                    <p class="card__number">0p</p>                
+                </div>
+                <div class="card card-expenses">
+                    <p class="card__title">Зачисления</p>
+                    <p class="card__subtitle">Нажмите, чтобы посмотреть историю операций</p>
+                    <p class="card__number">0p</p>                
+                </div>
+                <div class="card card-income">
+                    <p class="card__title">Расходы</p>
+                    <p class="card__subtitle">Нажмите, чтобы посмотреть историю операций</p>
+                    <p class="card__number">0p</p>                
+                </div>
+            </div>
+            <div class="history-area">
+                <ul class="history">
+
+                </ul>
+            </div>
+
+
+        </div>
+
+        <form name="add" class="form">
+            <p class="form__title">Добавьте новую операцию</p>
+            <p class="form__title">&#8595</p>
+            <div class="input">
+
+                <input type="date" name="date" placeholder="Дата" class="input__text" required>
+                <input type="number" name="summ" placeholder="Сумма" class="input__text" required>
+                <select name="input__type" id="type-select" required>
+
+                    <option value="">-- Выберите тип операции --</option>
+                    <option value="expenses">Доходы</option>
+                    <option value="income">Расходы</option>
+                </select>
+              <button class="input__btn" type="submit">
+                Добавить
+              </button>
+            </div>
+        </form>
+
+        <script src="./index.js" defer></script>
+
+        <template id="history-item">
+            <li class="history-item">
+                <p class="history-item__value history__date"></p>
+                <p class="history-item__value history__summ"></p>
+            </li>
+        </template>
+
+
+    </body>
+</html>
